@@ -159,3 +159,28 @@ async def test_outputs_always_valid(dut):
             "output contains X or Z — something is undriven"
 
     dut._log.info("PASS")
+
+
+# TEST 6 - does any neuron ever spike?
+@cocotb.test()
+async def test_spikes_with_max_weights(dut):
+    cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
+
+    dut.rst_n.value  = 0
+    dut.ena.value    = 0
+    dut.ui_in.value  = 0
+    dut.uio_in.value = 0
+    await ClockCycles(dut.clk, 3)
+    dut.rst_n.value = 1
+    await ClockCycles(dut.clk, 2)
+
+    await program_weights(dut, int("0111" * 32, 2))   # +7 on every synapse
+    dut.ena.value = 1
+
+    spike_count = 0
+    for _ in range(5000):
+        await RisingEdge(dut.clk)
+        spike_count += bin(int(dut.uo_out.value) & 0b1111).count("1")
+
+    dut._log.info(f"total spikes in 5000 cycles: {spike_count}")
+    assert spike_count > 0, "no neuron spiked in 5000 cycles with max weights"
