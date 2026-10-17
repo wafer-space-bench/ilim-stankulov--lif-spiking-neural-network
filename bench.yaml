@@ -1,0 +1,26 @@
+source:
+  url: https://github.com/ilim-stankulov/lif-spiking-neural-network
+  original_url: null
+  kind: fork
+  why: GitHub fork of the upstream repository
+  licence: null
+  upstream_default_branch: main
+tapeouts:
+- org: tinytapeout
+  run: ttgf26b
+  slot: tt_um_lif_snn
+  project: 4-Neuron LIF Spiking Neural Network
+  size: 1x1
+  kind: digital (Verilog)
+  commit: e719c332abf20572a0a33aea2f57fea26ae9046c
+  commit_source: commit from the shuttle repo's projects/<name>/commit_id.json
+  tag: tinytapeout/ttgf26b/tt_um_lif_snn
+  branch: tapeout/tinytapeout/ttgf26b/tt_um_lif_snn
+  page: https://app.tinytapeout.com/shuttles/ttgf26b
+generated: '2026-10-17T23:51:19Z'
+tooling: https://github.com/wafer-space/wafer.space-bench
+index: https://wafer-space-bench.github.io
+branches:
+- about
+- tapeout/tinytapeout/ttgf26b/tt_um_lif_snn
+- upstream/main
